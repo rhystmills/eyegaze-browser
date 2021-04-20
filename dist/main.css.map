@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","sources":["webpack://my-extension/./src/index.css"],"sourcesContent":["* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n  }\n\n*:focus {\n    outline: 2px solid #176e17;\n}\n\n/* -webkit-focus-ring-color */"],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;","sourceRoot":""}
