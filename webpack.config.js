@@ -11,7 +11,7 @@ module.exports = {
         filename: 'index.js'
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
+        extensions: ['.ts', '.tsx', '.js', '.json', '.mjs']
     },
     module: {
         rules: [
@@ -23,6 +23,12 @@ module.exports = {
             { 
                 test: /\.css$/, 
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.m?js/,
+                resolve: {
+                  fullySpecified: false
+                }
             }
         ]
     },

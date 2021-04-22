@@ -1,5 +1,5 @@
 window.onload = async function() {
-
+    console.log("main")
     webgazer.params.showVideoPreview = true;
     //start the webgazer tracker
     await webgazer.setRegression('ridge') /* currently must set regression and tracker */
