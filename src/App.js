@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { tabbable } from 'tabbable';
 import { Tabs } from './tabs'
+import webgazer from 'webgazer'
 
 function App() {
     const [tabbableElements, setTabbableElements] = useState([])
@@ -21,13 +22,20 @@ function App() {
     }, [])
 
     return (
-        <div>
-            <h1>Hello World!</h1>
-            <button onClick={() => console.log("Clicking the first button")}>Click me</button>
-            <p><a href="https://www.rhysmills.com">Link</a></p>
-            {/* <Tabs tabs={tabbableElements}/> */}
-            <iframe src={window.location.href} id="eyeframe" width={1000} height={1000}/>
-        </div>
+        <>
+            <head>
+
+            </head>
+            <body>
+                <div>
+                    <h1>Hello World!</h1>
+                    <button onClick={() => console.log("Clicking the first button")}>Click me</button>
+                    <p><a href="https://www.rhysmills.com">Link</a></p>
+                    {/* <Tabs tabs={tabbableElements}/> */}
+                    <iframe src={window.location.href} id="eyeframe" width={1000} height={1000}/>
+                </div>
+            </body>
+        </>
     );
 }
 

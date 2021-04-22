@@ -4,8 +4,7 @@ import './index.css';
 import App from './App';
 import { tabbable } from 'tabbable';
 
-
-ReactDOM.render(<App />, document.getElementsByTagName('body')[0]);
+ReactDOM.render(<App />, document.getElementsByTagName('html')[0]);
 
 
 
