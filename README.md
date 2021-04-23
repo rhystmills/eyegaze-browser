@@ -16,4 +16,4 @@ It seems possible to hack around this in a chrome extension but I haven't had ti
 - Click lots of times in cardinal directions and in the centre of the screen.
 - Hit space to activate the interface
 
-This app is totally hacked together, and tested exclusively with my face. The 'back button' is currently painted on.
+This app is totally hacked together, and tested exclusively with my face. The 'back button' is currently painted on.   :eye: :eye:
