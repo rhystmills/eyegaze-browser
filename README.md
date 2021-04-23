@@ -19,7 +19,7 @@ It seems possible to hack around this in a chrome extension but I haven't had ti
 This app is totally hacked together, and tested exclusively with my face. The 'back button' is currently painted on.
 
 ### How does it work?
-It replaces every page you visit with a React app that contains the eyegaze-browser interface. It then loads the page you are trying to visit in a iframe. It creates a list of all tabbable elements in the iframe (via [tabbable](https://github.com/focus-trap/tabbable)) - you can access everything in the iframe because it has the same domain as the page you're on (which is the same page according to the browser.
+It replaces every page you visit with a React app that contains the eyegaze-browser interface. It then loads the page you are trying to visit in a iframe. It creates a list of all tabbable elements in the iframe (via [tabbable](https://github.com/focus-trap/tabbable)) - you can access everything in the iframe because it has the same domain as the page you're on (which is the same page according to the browser).
 
 WebGazer adds the red dot, video, and click calibration. A button in the eyegaze-browser interface can be selected by the dot remaining inside its space for a certain duration - triggering a function specific to the button.
 
