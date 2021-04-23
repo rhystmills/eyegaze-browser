@@ -23,4 +23,6 @@ It replaces every page you visit with a React app that contains the eyegaze-brow
 
 WebGazer adds the red dot, video, and click calibration. A button in the eyegaze-browser interface can be selected by the dot remaining inside its space for a certain duration - triggering a function specific to the button.
 
+The massive buttons help mitigate the innaccuracies of the WebGazer (which is nonetheless magical).
+
 There were many sub-optimal choices made along the way due to the time limit.
