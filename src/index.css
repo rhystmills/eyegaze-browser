@@ -8,4 +8,37 @@
     outline: 2px solid #176e17;
 }
 
+.buttonRow {
+  display: flex;
+  flex-direction: horizontal;
+  list-style: none;
+  height: 50vh;
+  pointer-events: "none";
+  user-select: 'none';
+  -webkitTapHighlightColor:'transparent';
+}
+.buttonBox {
+  width: 60vw;
+  height: 100vh;
+}
+.bigButton {
+  pointer-events: "none";
+  user-select: 'none';
+  -webkitTapHighlightColor:'transparent';
+  width: 30vw;
+  height: 50vh;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50vh; 
+  font-size: 30px;
+  font-family: sans-serif;
+  border: 1px solid black;
+  background-color: #eee;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 /* -webkit-focus-ring-color */
