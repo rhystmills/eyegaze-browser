@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { tabbable } from 'tabbable';
 import { within } from './utils/within'
+import { getButtonRGB, baseShade } from './utils/getButtonRGB'
 
 
 function useInterval(callback, delay) {
@@ -70,8 +71,8 @@ export function App() {
     }
 
     const thresholds = {
-        next: 25,
-        prev: 25,
+        next: 100,
+        prev: 100,
         select: 100,
         back: 100
     }
@@ -103,7 +104,7 @@ export function App() {
                             handlers[id]();
                             newCount[id] = 0;
                         }
-                    } else if (newCount[id] > 1) newCount[id] -= 1;
+                    } else if (newCount[id] > 0) newCount[id] -= 1;
                 });
 
                 setCount(newCount);
@@ -142,12 +143,36 @@ export function App() {
                 <div>
                     <ul className="buttonBox">
                         <li className="buttonRow">
-                            <div id="select" className={buttonsActive?"bigButton":"bigButtonInactive"}>SELECT</div>
-                            <div id="back" className={buttonsActive?"bigButton":"bigButtonInactive"}>BACK</div>
+                            <div 
+                                id="select" 
+                                className={buttonsActive?"bigButton":"bigButtonInactive"}
+                                style={{
+                                    backgroundColor: `rgb(${getButtonRGB(count.select, thresholds.select).join(", ")})`
+                                }}
+                            >SELECT</div>
+                            <div 
+                                id="back" 
+                                className={buttonsActive?"bigButton":"bigButtonInactive"}
+                                style={{
+                                    backgroundColor: `rgb(${getButtonRGB(count.back, thresholds.back).join(", ")})`
+                                }}
+                            >BACK</div>
                         </li>
                         <li className="buttonRow">
-                            <div id="prev" className={buttonsActive?"bigButton":"bigButtonInactive"}>PREVIOUS</div>
-                            <div id="next" className={buttonsActive?"bigButton":"bigButtonInactive"}>NEXT</div>
+                            <div 
+                                id="prev" 
+                                className={buttonsActive?"bigButton":"bigButtonInactive"}
+                                style={{
+                                    backgroundColor: `rgb(${getButtonRGB(count.prev, thresholds.prev).join(", ")})`
+                                }}
+                            >PREVIOUS</div>
+                            <div 
+                                id="next" 
+                                className={buttonsActive?"bigButton":"bigButtonInactive"}
+                                style={{
+                                    backgroundColor: `rgb(${getButtonRGB(count.next, thresholds.next).join(", ")})`
+                                }}
+                            >NEXT</div>
                         </li>
                     </ul>
                 </div>
