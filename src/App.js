@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { tabbable } from 'tabbable';
-import { within } from './within'
+import { within } from './utils/within'
 
 
 function useInterval(callback, delay) {
@@ -74,8 +74,6 @@ export function App() {
         }
     }
 
-    
-
     useInterval(() => {
         if (clicksActive){
         const curDotPos = {x: dot.getBoundingClientRect().x,y: dot.getBoundingClientRect().y}
@@ -123,7 +121,6 @@ export function App() {
                     newCount.prev -= 1
                 }
             }
-            
 
             setCount(newCount)
         }}
