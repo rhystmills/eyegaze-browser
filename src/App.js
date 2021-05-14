@@ -21,12 +21,12 @@ function useInterval(callback, delay) {
     }, [delay]);
 }
 
-function App() {
+export function App() {
     const [tabbableElements, setTabbableElements] = useState([])
     const [currentTab, setCurrentTab] = useState(0)
     const [url, setUrl] = useState('')
     const [dot, setDot] = useState()
-    const [dotPos, setDotPos] = useState([0,0])
+    const [dotPos, setDotPos] = useState({x: 0,y: 0})
     const [count, setCount] = useState({
         select: 0,
         back: 0,
@@ -69,22 +69,18 @@ function App() {
         const gazeDot = document.getElementById('webgazerGazeDot')
         if (!dot){
             setDot(gazeDot)
-            
         }
-        // setDotPos([gazeDot.getBoundingClientRect().x,gazeDot.getBoundingClientRect().y])
     }
 
     useInterval(() => {
-        // Your custom logic here
         if (clicksActive){
-        const curDotPos = [dot.getBoundingClientRect().x,dot.getBoundingClientRect().y]
+        const curDotPos = {x: dot.getBoundingClientRect().x,y: dot.getBoundingClientRect().y}
         setDotPos(curDotPos);
         if (buttonsActive){
             const newCount = {...count}
-
             const select = document.getElementById('select');
             let selectPos = select.getBoundingClientRect()
-            if (selectPos.left < dotPos[0] && selectPos.right > dotPos[0] && selectPos.bottom > dotPos[1] && selectPos.top < dotPos[1]){
+            if (selectPos.left < dotPos.x && selectPos.right > dotPos.x && selectPos.bottom > dotPos.y && selectPos.top < dotPos.y){
                 newCount.select += 1
                 if (newCount.select > 100){
                     selectTab()
@@ -98,7 +94,7 @@ function App() {
 
             const next = document.getElementById('next');
             let nextPos = next.getBoundingClientRect()
-            if (nextPos.left < dotPos[0] && nextPos.right > dotPos[0] && nextPos.bottom > dotPos[1] && nextPos.top < dotPos[1]){
+            if (nextPos.left < dotPos.x && nextPos.right > dotPos.x && nextPos.bottom > dotPos.y && nextPos.top < dotPos.y){
                 newCount.next += 1
                 if (newCount.next > 25){
                     nextTab()
@@ -112,7 +108,7 @@ function App() {
 
             const prev = document.getElementById('prev');
             let prevPos = prev.getBoundingClientRect()
-            if (prevPos.left < dotPos[0] && prevPos.right > dotPos[0] && prevPos.bottom > dotPos[1] && prevPos.top < dotPos[1]){
+            if (prevPos.left < dotPos.x && prevPos.right > dotPos.x && prevPos.bottom > dotPos.y && prevPos.top < dotPos.y){
                 newCount.prev += 1
                 if (newCount.prev > 50){
                     prevTab()
@@ -127,21 +123,16 @@ function App() {
 
             setCount(newCount)
         }}
-    })
+    }, [10])
 
     useEffect(() => {
         console.log("recalculating tabs")
         const eyeframe = document.getElementById("eyeframe")
         setTimeout(() => {   
             const eyedoc = eyeframe.contentDocument ? eyeframe.contentDocument : eyeframe.contentWindow.document;
-            // console.log(eyedoc)
             const tabs = tabbable(eyedoc, [])
-            // console.log(tabs)
             setTabbableElements(tabs)
-            // console.log("tabbable", tabbableElements)
             tabs[0].focus()
-            // console.log(tabs[0])
-            // tabs.forEach(element => element.setAttribute("style","border: solid 1px #448844"))
         }, 2500)
     }, [url])
 
@@ -149,8 +140,6 @@ function App() {
         setUrl(window.location.href)
         window.addEventListener("keydown", keyHandler);
         window.addEventListener("click", clickHandler);
-
-        //   return () => clearInterval(interval);
     }, [])
 
 
@@ -195,5 +184,3 @@ const mainStyle = {
     display: 'flex',
     flexDirection: 'horizontal',
 }
-
-export default App;

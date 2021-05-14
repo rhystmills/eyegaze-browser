@@ -9,6 +9,11 @@
 # production
 /build
 
+#build files
+dist
+dist/index.js
+dist/index.js.map
+
 # misc
 .DS_Store
 .metals
