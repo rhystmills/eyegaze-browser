@@ -1,17 +1,35 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+/* -- Resets -- */
 
-*:focus {
-    outline: 2px solid #176e17;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* -- Elements -- */
+
+main {
+  display: flex;
+  flex-direction: horizontal;
 }
 
 p {
   font-family: sans-serif;
   color: #111;
 }
+
+/* IDs */
+#eyeframe {
+  pointer-events: none; 
+  user-select: none; 
+  -webkit-tap-highlight-color: transparent;
+  height: 80%;
+  width: 40vw;
+  box-sizing: border-box;
+  margin-top: 180px;
+}
+
+/* -- Classes -- */
 .buttonRow {
   display: flex;
   flex-direction: horizontal;
@@ -66,4 +84,3 @@ p {
   -ms-user-select: none;
   user-select: none;
 }
-/* -webkit-focus-ring-color */

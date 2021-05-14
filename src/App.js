@@ -145,13 +145,13 @@ export function App() {
 
     return (
         <>
-            <main style={mainStyle} onClick={initGazeDot}>
+            <main onClick={initGazeDot}>
                 <div>
                     <p style={{marginLeft: '250px', position: 'absolute', width: '150px'}}>
                     <br/>Watch the mouse around the screen and repeatedly click to calibrate
                     <br/><br/>{!buttonsActive? 'Then, press space to activate the buttons' : ''}
                     </p>
-                    <iframe src={url} style={eyeframeStyle} unselectable="on" tabIndex={-1} id="eyeframe" width={1000} height={1000}/>
+                    <iframe src={url} unselectable="on" tabIndex={-1} id="eyeframe" width={1000} height={1000}/>
                 </div>
                 <div>
                     <ul className="buttonBox">
@@ -170,17 +170,17 @@ export function App() {
     );
 }
 
-const eyeframeStyle = {
-    pointerEvents: "none", 
-    userSelect: 'none', 
-    WebkitTapHighlightColor:'transparent',
-    height: '80%',
-    width: '40vw',
-    boxSizing: 'border-box',
-    marginTop: '180px'
-}
+// const eyeframeStyle = {
+//     pointerEvents: "none", 
+//     userSelect: 'none', 
+//     WebkitTapHighlightColor:'transparent',
+//     height: '80%',
+//     width: '40vw',
+//     boxSizing: 'border-box',
+//     marginTop: '180px'
+// }
 
-const mainStyle = {
-    display: 'flex',
-    flexDirection: 'horizontal',
-}
+// const mainStyle = {
+//     display: 'flex',
+//     flexDirection: 'horizontal',
+// }
