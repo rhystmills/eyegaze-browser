@@ -10,6 +10,7 @@ Lots of websites don't work because their security policy won't allow:
 It seems possible to hack around this in a chrome extension but I haven't had time yet.
 
 ### How to use:
+- Run `npm run create` in this repository to create a `dist` folder
 - Turn on developer mode in your chrome extensions folder.
 - 'Add unpacked' the `dist` folder from this repo. This should add the extension.
 - Open a compatible page (probably via trial and error).
