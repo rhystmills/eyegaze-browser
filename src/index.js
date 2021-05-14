@@ -21,8 +21,5 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     var yprediction = data.y; //these y coordinates are relative to the viewport
 }).begin();
 
-const body = document.getElementsByTagName('body')[0]
-body.setAttribute('id','body')
-
-ReactDOM.render(<App />, document.getElementById('body'));
-ReactDOM.render(<Null />, document.getElementsByTagName('head')[0])
+ReactDOM.render(<App />, document.body);
+ReactDOM.render(<Null />, document.head)

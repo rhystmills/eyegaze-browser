@@ -30,6 +30,7 @@ p {
 }
 
 /* -- Classes -- */
+
 .buttonRow {
   display: flex;
   flex-direction: horizontal;
@@ -39,10 +40,12 @@ p {
   user-select: 'none';
   -webkitTapHighlightColor:'transparent';
 }
+
 .buttonBox {
   width: 60vw;
   height: 100vh;
 }
+
 .bigButton {
   pointer-events: "none";
   user-select: 'none';
@@ -63,6 +66,7 @@ p {
   -ms-user-select: none;
   user-select: none;
 }
+
 .bigButtonInactive {
   pointer-events: "none";
   user-select: 'none';

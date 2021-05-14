@@ -169,18 +169,3 @@ export function App() {
         </>
     );
 }
-
-// const eyeframeStyle = {
-//     pointerEvents: "none", 
-//     userSelect: 'none', 
-//     WebkitTapHighlightColor:'transparent',
-//     height: '80%',
-//     width: '40vw',
-//     boxSizing: 'border-box',
-//     marginTop: '180px'
-// }
-
-// const mainStyle = {
-//     display: 'flex',
-//     flexDirection: 'horizontal',
-// }
