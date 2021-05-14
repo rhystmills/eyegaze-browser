@@ -1,9 +1,5 @@
-import { post } from 'jquery';
 import React, { useEffect, useState, useRef } from 'react';
-import ReactDOM from "react-dom";
-import { compose } from 'redux';
-import { isTabbable, tabbable } from 'tabbable';
-import { Calibration } from './calibration'
+import { tabbable } from 'tabbable';
 
 function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -56,11 +52,6 @@ function App() {
     }
 
     const nextTab = () => {
-        // console.log(tabbableElements)
-        // console.log(currentTab)
-        // console.log(tabbableElements)
-        // console.log(currentTab)
-        // console.log(tabbableElements[0])
         tabbableElements[currentTab + 1].focus()
         setCurrentTab(currentTab + 1)
     }
@@ -70,17 +61,12 @@ function App() {
     }
     
     const selectTab = () => {
-        // console.log(url)
         tabbableElements[currentTab].click()
         setUrl(tabbableElements[currentTab].href)
-        // console.log(url)
-
     }
 
     const initGazeDot = () => {
         const gazeDot = document.getElementById('webgazerGazeDot')
-        // console.log(gazeDot)
-        // console.log(gazeDot.getBoundingClientRect())
         if (!dot){
             setDot(gazeDot)
             
@@ -170,31 +156,27 @@ function App() {
 
     return (
         <>
-            {/* <head>
-            </head>
-            <body> */}
-                <main style={mainStyle} onClick={initGazeDot}>
-                    <div>
-                        <p style={{marginLeft: '250px', position: 'absolute', width: '150px'}}>
-                        <br/>Watch the mouse around the screen and repeatedly click to calibrate
-                        <br/><br/>{!buttonsActive? 'Then, press space to activate the buttons' : ''}
-                        </p>
-                        <iframe src={url} style={eyeframeStyle} unselectable="on" tabIndex={-1} id="eyeframe" width={1000} height={1000}/>
-                    </div>
-                    <div>
-                        <ul className="buttonBox">
-                            <li className="buttonRow">
-                                <div id="select" className={buttonsActive?"bigButton":"bigButtonInactive"}>SELECT</div>
-                                <div id="back" className={buttonsActive?"bigButton":"bigButtonInactive"}>BACK</div>
-                            </li>
-                            <li className="buttonRow">
-                                <div id="prev" className={buttonsActive?"bigButton":"bigButtonInactive"}>PREVIOUS</div>
-                                <div id="next" className={buttonsActive?"bigButton":"bigButtonInactive"}>NEXT</div>
-                            </li>
-                        </ul>
-                    </div>
-                </main>
-            {/* </body> */}
+            <main style={mainStyle} onClick={initGazeDot}>
+                <div>
+                    <p style={{marginLeft: '250px', position: 'absolute', width: '150px'}}>
+                    <br/>Watch the mouse around the screen and repeatedly click to calibrate
+                    <br/><br/>{!buttonsActive? 'Then, press space to activate the buttons' : ''}
+                    </p>
+                    <iframe src={url} style={eyeframeStyle} unselectable="on" tabIndex={-1} id="eyeframe" width={1000} height={1000}/>
+                </div>
+                <div>
+                    <ul className="buttonBox">
+                        <li className="buttonRow">
+                            <div id="select" className={buttonsActive?"bigButton":"bigButtonInactive"}>SELECT</div>
+                            <div id="back" className={buttonsActive?"bigButton":"bigButtonInactive"}>BACK</div>
+                        </li>
+                        <li className="buttonRow">
+                            <div id="prev" className={buttonsActive?"bigButton":"bigButtonInactive"}>PREVIOUS</div>
+                            <div id="next" className={buttonsActive?"bigButton":"bigButtonInactive"}>NEXT</div>
+                        </li>
+                    </ul>
+                </div>
+            </main>
         </>
     );
 }

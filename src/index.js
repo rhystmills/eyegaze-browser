@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { tabbable } from 'tabbable';
 import webgazer from 'webgazer'
 import { Null } from './Null';
 
@@ -16,17 +15,14 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     }
     var xprediction = data.x; //these x coordinates are relative to the viewport
     var yprediction = data.y; //these y coordinates are relative to the viewport
-    // console.log(elapsedTime); //elapsed time is based on time since begin was called
 }).begin();
 webgazer.showVideo(true)
 
-console.log(webgazer)
-webgazer.params.showVideoPreview = true
 const body = document.getElementsByTagName('body')[0]
 body.setAttribute('id','body')
-const root = document.createElement('div')
-root.setAttribute('id','root')
-body.appendChild(root)
+// const root = document.createElement('div')
+// root.setAttribute('id','root')
+// body.appendChild(root)
 ReactDOM.render(<App />, document.getElementById('body'));
 ReactDOM.render(<Null />, document.getElementsByTagName('head')[0])
 
