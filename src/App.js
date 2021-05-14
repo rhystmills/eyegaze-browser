@@ -39,12 +39,10 @@ export function App() {
     const [buttonsActive, setButtonsActive] = useState(false)
 
     const keyHandler = (e) => {
-        console.log(e.code)
         if (e.code === 'Space'){
             setButtonsActive(true)
-            console.log("activating")
+            console.log("Activating")
         }
-        console.log(buttonsActive)
     }
     
     const clickHandler = (e) => {
