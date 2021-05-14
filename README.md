@@ -27,3 +27,10 @@ WebGazer adds the red dot, video, and click calibration. A button in the eyegaze
 The massive buttons help mitigate the innaccuracies of the WebGazer (which is nonetheless magical).
 
 There were many sub-optimal choices made along the way due to the time limit.
+
+### Webgazer dependency problem
+
+I have found that the `webgazer` used does not build. To fix it, after installing the dependencies here:
+1. Navigate to 'facemesh.mjs' within the `webgazer` node_module
+2. Change the import line to `import { load } from '@tensorflow-models/facemesh';`
+3. Change line 11 to ` this.model = load({"maxFaces":1});`
