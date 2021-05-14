@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { tabbable } from 'tabbable';
+import { within } from './within'
+
 
 function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -72,15 +74,17 @@ export function App() {
         }
     }
 
+    
+
     useInterval(() => {
         if (clicksActive){
         const curDotPos = {x: dot.getBoundingClientRect().x,y: dot.getBoundingClientRect().y}
         setDotPos(curDotPos);
         if (buttonsActive){
             const newCount = {...count}
+
             const select = document.getElementById('select');
-            let selectPos = select.getBoundingClientRect()
-            if (selectPos.left < dotPos.x && selectPos.right > dotPos.x && selectPos.bottom > dotPos.y && selectPos.top < dotPos.y){
+            if (within(curDotPos, select)){
                 newCount.select += 1
                 if (newCount.select > 100){
                     selectTab()

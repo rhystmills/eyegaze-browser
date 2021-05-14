@@ -29,6 +29,11 @@ module.exports = {
                 resolve: {
                   fullySpecified: false
                 }
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             }
         ]
     },
