@@ -28,7 +28,7 @@ export function App() {
     const [currentTab, setCurrentTab] = useState(0)
     const [url, setUrl] = useState('')
     const [dot, setDot] = useState()
-    const [dotPos, setDotPos] = useState({x: 0,y: 0})
+    const [dotPosition, setDotPosition] = useState({x: 0,y: 0})
     const [count, setCount] = useState({
         select: 0,
         back: 0,
@@ -53,18 +53,29 @@ export function App() {
         }
     }
 
-    const nextTab = () => {
-        tabbableElements[currentTab + 1].focus()
-        setCurrentTab(currentTab + 1)
+    const handlers = { 
+        next: () => {
+            tabbableElements[currentTab + 1].focus()
+            setCurrentTab(currentTab + 1)
+        },
+        prev: () => {
+            tabbableElements[currentTab - 1].focus()
+            setCurrentTab(currentTab - 1)
+        },
+        select: () => {
+            tabbableElements[currentTab].click()
+            setUrl(tabbableElements[currentTab].href)
+        },
+        back: () => {
+            console.log("back selected")
+        }
     }
-    const prevTab = () => {
-        tabbableElements[currentTab - 1].focus()
-        setCurrentTab(currentTab - 1)
-    }
-    
-    const selectTab = () => {
-        tabbableElements[currentTab].click()
-        setUrl(tabbableElements[currentTab].href)
+
+    const thresholds = {
+        next: 25,
+        prev: 25,
+        select: 100,
+        back: 100
     }
 
     const initGazeDot = () => {
@@ -76,54 +87,30 @@ export function App() {
 
     useInterval(() => {
         if (clicksActive){
-        const curDotPos = {x: dot.getBoundingClientRect().x,y: dot.getBoundingClientRect().y}
-        setDotPos(curDotPos);
-        if (buttonsActive){
-            const newCount = {...count}
-
-            const select = document.getElementById('select');
-            if (within(curDotPos, select)){
-                newCount.select += 1
-                if (newCount.select > 100){
-                    selectTab()
-                    newCount.select = 0
-                }
-            } else {
-                if (newCount.select > 1){
-                    newCount.select -= 1
-                }
+            const currentDotPosition = {
+                x: dot.getBoundingClientRect().x,
+                y: dot.getBoundingClientRect().y
             }
+            setDotPosition(currentDotPosition);
 
-            const next = document.getElementById('next');
-            let nextPos = next.getBoundingClientRect()
-            if (nextPos.left < dotPos.x && nextPos.right > dotPos.x && nextPos.bottom > dotPos.y && nextPos.top < dotPos.y){
-                newCount.next += 1
-                if (newCount.next > 25){
-                    nextTab()
-                    newCount.next = 0
-                }
-            } else {
-                if (newCount.next > 1){
-                    newCount.next -= 1
-                }
+            if (buttonsActive){
+                const newCount = { ...count };
+                const buttonIds = ['select','back','prev','next'];
+
+                buttonIds.forEach((id) => {
+                    const button = document.getElementById(id);
+                    if (within(currentDotPosition, button)){
+                        newCount[id] += 1;
+                        if (newCount[id] >= thresholds[id]){
+                            handlers[id]();
+                            newCount[id] = 0;
+                        }
+                    } else if (newCount[id] > 1) newCount[id] -= 1;
+                });
+
+                setCount(newCount);
             }
-
-            const prev = document.getElementById('prev');
-            let prevPos = prev.getBoundingClientRect()
-            if (prevPos.left < dotPos.x && prevPos.right > dotPos.x && prevPos.bottom > dotPos.y && prevPos.top < dotPos.y){
-                newCount.prev += 1
-                if (newCount.prev > 50){
-                    prevTab()
-                    newCount.prev = 0
-                }
-            } else {
-                if (newCount.prev > 1){
-                    newCount.prev -= 1
-                }
-            }
-
-            setCount(newCount)
-        }}
+        }
     }, [10])
 
     useEffect(() => {
