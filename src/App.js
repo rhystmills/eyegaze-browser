@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { tabbable } from 'tabbable';
-import { within } from './utils/within'
-import { getButtonRGB, baseShade } from './utils/getButtonRGB'
+import { within } from './utils/within';
+import { getButtonRGB, baseShade } from './utils/getButtonRGB';
+import { Button } from './Button';
 
 
 function useInterval(callback, delay) {
@@ -129,7 +130,6 @@ export function App() {
         window.addEventListener("click", clickHandler);
     }, [])
 
-
     return (
         <>
             <main onClick={initGazeDot}>
@@ -138,41 +138,45 @@ export function App() {
                     <br/>Watch the mouse around the screen and repeatedly click to calibrate
                     <br/><br/>{!buttonsActive? 'Then, press space to activate the buttons' : ''}
                     </p>
-                    <iframe src={url} unselectable="on" tabIndex={-1} id="eyeframe" width={1000} height={1000}/>
+                    <iframe src={url} unselectable="on" tabIndex={-1} id="eyeframe"/>
                 </div>
                 <div>
                     <ul className="buttonBox">
                         <li className="buttonRow">
-                            <div 
-                                id="select" 
-                                className={buttonsActive?"bigButton":"bigButtonInactive"}
-                                style={{
-                                    backgroundColor: `rgb(${getButtonRGB(count.select, thresholds.select).join(", ")})`
-                                }}
-                            >SELECT</div>
-                            <div 
-                                id="back" 
-                                className={buttonsActive?"bigButton":"bigButtonInactive"}
-                                style={{
-                                    backgroundColor: `rgb(${getButtonRGB(count.back, thresholds.back).join(", ")})`
-                                }}
-                            >BACK</div>
+                            <Button 
+                                id="select"
+                                label="SELECT"
+                                buttonsActive={buttonsActive}
+                                size={250}
+                                progress={count.select > 0 ? count.select/thresholds.select * 100 : 0}
+                                color={`rgb(${getButtonRGB(count.select, thresholds.select).join(", ")})`}
+                            />
+                            <Button 
+                                id="back"
+                                label="BACK"
+                                buttonsActive={buttonsActive}
+                                size={250}
+                                progress={count.back > 0 ? count.back/thresholds.back * 100 : 0}
+                                color={`rgb(${getButtonRGB(count.back, thresholds.back).join(", ")})`}
+                            />
                         </li>
                         <li className="buttonRow">
-                            <div 
-                                id="prev" 
-                                className={buttonsActive?"bigButton":"bigButtonInactive"}
-                                style={{
-                                    backgroundColor: `rgb(${getButtonRGB(count.prev, thresholds.prev).join(", ")})`
-                                }}
-                            >PREVIOUS</div>
-                            <div 
-                                id="next" 
-                                className={buttonsActive?"bigButton":"bigButtonInactive"}
-                                style={{
-                                    backgroundColor: `rgb(${getButtonRGB(count.next, thresholds.next).join(", ")})`
-                                }}
-                            >NEXT</div>
+                            <Button 
+                                id="prev"
+                                label="PREVIOUS"
+                                buttonsActive={buttonsActive}
+                                size={250}
+                                progress={count.prev > 0 ? count.prev/thresholds.prev * 100 : 0}
+                                color={`rgb(${getButtonRGB(count.prev, thresholds.prev).join(", ")})`}
+                            />
+                            <Button 
+                                id="next"
+                                label="NEXT"
+                                buttonsActive={buttonsActive}
+                                size={250}
+                                progress={count.next > 0 ? count.next/thresholds.next * 100 : 0}
+                                color={`rgb(${getButtonRGB(count.next, thresholds.next).join(", ")})`}
+                            />
                         </li>
                     </ul>
                 </div>
