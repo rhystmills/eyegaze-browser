@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif
 }
 
 /* -- Elements -- */
@@ -14,7 +15,6 @@ main {
 }
 
 p {
-  font-family: sans-serif;
   color: #111;
 }
 
@@ -31,12 +31,18 @@ p {
 
 /* -- Classes -- */
 
+.instructions {
+  margin-left: 250px;
+  margin-top: 10px;
+  position: absolute;
+  width: calc(40vw - 250px);
+}
 .buttonRow {
   box-sizing: border-box;
   display: flex;
   flex-direction: horizontal;
   list-style: none;
-  height: calc(50vh - 5px);
+  height: calc(33.3vh - 5px);
   pointer-events: "none";
   user-select: 'none';
   -webkitTapHighlightColor:'transparent';
@@ -47,7 +53,6 @@ p {
   padding: 5px;
   width: 60vw;
   height: 100vh;
-  background-color: #fff;
 }
 
 .bigButton {
@@ -59,10 +64,10 @@ p {
   -webkitTapHighlightColor:'transparent';
   position: relative;
   width: calc(30vw - 15px);
-  height: calc(50vh - 15px);
+  height: calc(33.3vh - 15px);
   text-align: center;
   vertical-align: middle;
-  line-height: 50vh; 
+  line-height: 33.3vh; 
   font-size: 36px;
   font-family: sans-serif;
   -webkit-touch-callout: none;
@@ -75,7 +80,7 @@ p {
 
 .bigButtonActive {
   border: 1px solid black;
-  background-color: #eee;
+  background-color: #fff;
 }
 
 .bigButtonInactive {

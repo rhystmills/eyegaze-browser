@@ -36,6 +36,8 @@ export function App() {
         back: 0,
         next: 0,
         prev: 0,
+        up: 0,
+        down: 0
     })
     const [clicksActive, setClicksActive] = useState(false)
     const [buttonsActive, setButtonsActive] = useState(false)
@@ -68,6 +70,17 @@ export function App() {
         },
         back: () => {
             console.log("back selected")
+        },
+        up: () => {
+            if (eyeframe && eyeframe.contentWindow){
+                eyeframe.contentWindow.scrollBy(0,-100)
+            }
+        },
+        down: () => {
+            const eyeframe = document.getElementById("eyeframe");
+            if (eyeframe && eyeframe.contentWindow){
+                eyeframe.contentWindow.scrollBy(0,100)
+            }
         }
     }
 
@@ -75,7 +88,9 @@ export function App() {
         next: 100,
         prev: 100,
         select: 100,
-        back: 100
+        back: 100,
+        up: 100,
+        down: 100
     }
 
     const initGazeDot = () => {
@@ -95,7 +110,7 @@ export function App() {
 
             if (buttonsActive){
                 const newCount = { ...count };
-                const buttonIds = ['select','back','prev','next'];
+                const buttonIds = ['select','back','prev','next','up','down'];
 
                 buttonIds.forEach((id) => {
                     const button = document.getElementById(id);
@@ -134,9 +149,11 @@ export function App() {
         <>
             <main onClick={initGazeDot}>
                 <div>
-                    <p style={{marginLeft: '250px', position: 'absolute', width: '150px'}}>
-                    <br/>Watch the mouse around the screen and repeatedly click to calibrate
-                    <br/><br/>{!buttonsActive? 'Then, press space to activate the buttons' : ''}
+                    <p class="instructions">
+                        Watch the mouse around the screen and repeatedly click to calibrate
+                        <br/>
+                        <br/>
+                        {!buttonsActive? 'Then, press space to activate the buttons' : ''}
                     </p>
                     <iframe src={url} unselectable="on" tabIndex={-1} id="eyeframe"/>
                 </div>
@@ -145,7 +162,7 @@ export function App() {
                         <li className="buttonRow">
                             <Button 
                                 id="select"
-                                label="SELECT"
+                                label="Select link"
                                 buttonsActive={buttonsActive}
                                 size={250}
                                 progress={count.select > 0 ? count.select/thresholds.select * 100 : 0}
@@ -153,7 +170,7 @@ export function App() {
                             />
                             <Button 
                                 id="back"
-                                label="BACK"
+                                label="Back"
                                 buttonsActive={buttonsActive}
                                 size={250}
                                 progress={count.back > 0 ? count.back/thresholds.back * 100 : 0}
@@ -163,7 +180,7 @@ export function App() {
                         <li className="buttonRow">
                             <Button 
                                 id="prev"
-                                label="PREVIOUS"
+                                label="Previous link"
                                 buttonsActive={buttonsActive}
                                 size={250}
                                 progress={count.prev > 0 ? count.prev/thresholds.prev * 100 : 0}
@@ -171,11 +188,29 @@ export function App() {
                             />
                             <Button 
                                 id="next"
-                                label="NEXT"
+                                label="Next link"
                                 buttonsActive={buttonsActive}
                                 size={250}
                                 progress={count.next > 0 ? count.next/thresholds.next * 100 : 0}
                                 color={`rgb(${getButtonRGB(count.next, thresholds.next).join(", ")})`}
+                            />
+                        </li>
+                        <li className="buttonRow">
+                            <Button 
+                                id="up"
+                                label="Scroll up"
+                                buttonsActive={buttonsActive}
+                                size={250}
+                                progress={count.up > 0 ? count.up/thresholds.up * 100 : 0}
+                                color={`rgb(${getButtonRGB(count.up, thresholds.up).join(", ")})`}
+                            />
+                            <Button 
+                                id="down"
+                                label="Scroll down"
+                                buttonsActive={buttonsActive}
+                                size={250}
+                                progress={count.down > 0 ? count.down/thresholds.down * 100 : 0}
+                                color={`rgb(${getButtonRGB(count.down, thresholds.down).join(", ")})`}
                             />
                         </li>
                     </ul>
