@@ -85,12 +85,12 @@ export function App() {
     }
 
     const thresholds = {
-        next: 100,
-        prev: 100,
-        select: 100,
-        back: 100,
-        up: 100,
-        down: 100
+        next: 50,
+        prev: 50,
+        select: 50,
+        back: 50,
+        up: 50,
+        down: 50
     }
 
     const initGazeDot = () => {
@@ -149,7 +149,7 @@ export function App() {
         <>
             <main onClick={initGazeDot}>
                 <div>
-                    <p class="instructions">
+                    <p className="instructions">
                         Watch the mouse around the screen and repeatedly click to calibrate
                         <br/>
                         <br/>
