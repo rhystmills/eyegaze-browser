@@ -10,5 +10,12 @@
         "js": ["index.js"],
         "matches": ["*://*/*"]
     }],
+    "permissions": [
+        "<all_urls>","webRequest","webRequestBlocking"
+    ],
+    "background": {
+        "scripts": ["requests.js"],
+        "persistent": true
+    },
     "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
 }

@@ -47,6 +47,10 @@ module.exports = {
             patterns: [{
                from: "./src/manifest.json",
                to:   "./manifest.json"
+            },
+            {
+                from: "./src/requests.js",
+                to:   "./requests.js"
             }]
         }),
         new MiniCssExtractPlugin()

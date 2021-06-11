@@ -101,7 +101,7 @@ export function App() {
     }
 
     useInterval(() => {
-        if (clicksActive){
+        if (dot && clicksActive){
             const currentDotPosition = {
                 x: dot.getBoundingClientRect().x,
                 y: dot.getBoundingClientRect().y
