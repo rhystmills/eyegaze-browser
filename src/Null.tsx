@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import * as React from "react";
 
-export function Null(props) {
-    useEffect(() => console.log("props", props))
+export const Null = () => {
+    // useEffect(() => console.log("props", props))
     return (
         <>
             <title>Eyegaze Browser</title>
