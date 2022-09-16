@@ -1,7 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import * as React from 'react';
+import { useEffect, useState, useRef } from 'react';
 
+type ProgressBarProps = {
+    size: number,
+    progress: number,
+    color: string
+}
 
-export const ProgressBar = (props) => {
+export const ProgressBar = (props: ProgressBarProps) => {
     const { 
         size, 
         progress,
@@ -10,16 +16,18 @@ export const ProgressBar = (props) => {
 
     const [offset, setOffset] = useState(0);
     const circleRef = useRef(null);
+
+    const strokeWidth = 8;
+    const center = size / 2;
+    const radius = size / 2 - strokeWidth / 2;
+    const circumference = 2 * Math.PI * radius;
+
     useEffect(() => {
         const progressOffset = ((100 - progress) / 100) * circumference;
         setOffset(progressOffset);
         // circleRef.current.style = 'transition: stroke-dashoffset 850ms ease-in-out;';
     }, [setOffset, circumference, progress, offset]);
 
-    const strokeWidth = 8;
-    const center = size / 2;
-    const radius = size / 2 - strokeWidth / 2;
-    const circumference = 2 * Math.PI * radius;
     return (
         <>
             <svg 

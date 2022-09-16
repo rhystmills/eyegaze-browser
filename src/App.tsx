@@ -1,12 +1,24 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { tabbable } from 'tabbable';
 import { within } from './utils/within';
 import { getButtonRGB, baseShade } from './utils/getButtonRGB';
 import { Button } from './Button';
+import * as React from 'react';
 
 
-function useInterval(callback, delay) {
-    const savedCallback = useRef();
+type SavedCallback = {
+    current?: () => void;
+}
+
+type ButtonId = 'select' | 'back' | 'next' | 'prev' | 'up' | 'down'
+
+type Count = Record<ButtonId, number>
+
+const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
+    true
+
+const useInterval = (callback: () => void, delay: number[]) => {
+    const savedCallback = useRef() as SavedCallback;
   
     // Remember the latest callback.
     useEffect(() => {
@@ -16,22 +28,22 @@ function useInterval(callback, delay) {
     // Set up the interval.
     useEffect(() => {
       function tick() {
-        savedCallback.current();
+        savedCallback?.current();
       }
       if (delay !== null) {
-        let id = setInterval(tick, delay);
+        let id = setInterval(tick, 0);
         return () => clearInterval(id);
       }
     }, [delay]);
 }
 
-export function App() {
+export const App = () => {
     const [tabbableElements, setTabbableElements] = useState([])
     const [currentTab, setCurrentTab] = useState(0)
     const [url, setUrl] = useState('')
-    const [dot, setDot] = useState()
+    const [dot, setDot] = useState<HTMLElement>()
     const [dotPosition, setDotPosition] = useState({x: 0,y: 0})
-    const [count, setCount] = useState({
+    const [count, setCount] = useState<Count>({
         select: 0,
         back: 0,
         next: 0,
@@ -42,14 +54,14 @@ export function App() {
     const [clicksActive, setClicksActive] = useState(false)
     const [buttonsActive, setButtonsActive] = useState(false)
 
-    const keyHandler = (e) => {
+    const keyHandler = (e: KeyboardEvent) => {
         if (e.code === 'Space'){
             setButtonsActive(true)
             console.log("Activating")
         }
     }
     
-    const clickHandler = (e) => {
+    const clickHandler = () => {
         if (!clicksActive){
             setClicksActive(true)
         }
@@ -72,13 +84,14 @@ export function App() {
             console.log("back selected")
         },
         up: () => {
-            if (eyeframe && eyeframe.contentWindow){
+            const eyeframe = document.getElementById("eyeframe");
+            if (isIFrame(eyeframe)){
                 eyeframe.contentWindow.scrollBy(0,-100)
             }
         },
         down: () => {
             const eyeframe = document.getElementById("eyeframe");
-            if (eyeframe && eyeframe.contentWindow){
+            if (isIFrame(eyeframe)){
                 eyeframe.contentWindow.scrollBy(0,100)
             }
         }
@@ -110,7 +123,7 @@ export function App() {
 
             if (buttonsActive){
                 const newCount = { ...count };
-                const buttonIds = ['select','back','prev','next','up','down'];
+                const buttonIds = ['select','back','prev','next','up','down'] as ButtonId[];
 
                 buttonIds.forEach((id) => {
                     const button = document.getElementById(id);
@@ -132,10 +145,13 @@ export function App() {
         console.log("recalculating tabs")
         const eyeframe = document.getElementById("eyeframe")
         setTimeout(() => {   
-            const eyedoc = eyeframe.contentDocument ? eyeframe.contentDocument : eyeframe.contentWindow.document;
-            const tabs = tabbable(eyedoc, [])
+            if (isIFrame(eyeframe)) {
+                const eyedoc = eyeframe.contentDocument ? eyeframe.contentDocument : eyeframe.contentWindow.document;
+                const tabs = tabbable(eyedoc as unknown as Element)
             setTabbableElements(tabs)
             tabs[0].focus()
+            }
+        
         }, 2500)
     }, [url])
 

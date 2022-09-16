@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     devtool: 'cheap-module-source-map',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -49,8 +49,8 @@ module.exports = {
                to:   "./manifest.json"
             },
             {
-                from: "./src/requests.js",
-                to:   "./requests.js"
+                from: "./src/requests.ts",
+                to:   "./requests.ts"
             }]
         }),
         new MiniCssExtractPlugin()

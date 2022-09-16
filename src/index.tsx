@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import webgazer from 'webgazer'
@@ -13,12 +13,10 @@ const viewer = {
 webgazer.params.showVideoPreview = true;
 webgazer.params.videoViewerWidth = viewer.width;
 webgazer.params.videoViewerHeight = viewer.height;
-webgazer.setGazeListener(function(data, elapsedTime) {
+webgazer.setGazeListener(function(data: { x: number; y: number; }) {
     if (data == null) {
         return;
     }
-    var xprediction = data.x; //these x coordinates are relative to the viewport
-    var yprediction = data.y; //these y coordinates are relative to the viewport
 }).begin();
 
 ReactDOM.render(<App />, document.body);
